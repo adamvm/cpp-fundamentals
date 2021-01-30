@@ -4,6 +4,9 @@ on: [push, pull_request]
 
 jobs:
   calculate:
+    strategy:    
+      matrix:
+        cc: [gcc, clang]
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
@@ -12,7 +15,11 @@ jobs:
       run: mkdir module1/homework/calculate/build
     - name: Compile
       working-directory: module1/homework/calculate/build
+      env:
+        CC: ${{ matrix.cc }}
       run: |
+        echo "C++ Compiler:"
+        ${CC} --version
         cmake ..
         make
     - name: Run tests
@@ -28,7 +35,11 @@ jobs:
       run: mkdir module1/homework/fibonacci/build
     - name: Compile
       working-directory: module1/homework/fibonacci/build
+      env:
+        CC: ${{ matrix.cc }}
       run: |
+        echo "C++ Compiler:"
+        ${CC} --version
         cmake ..
         make
     - name: Run tests
