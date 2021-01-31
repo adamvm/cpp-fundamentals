@@ -13,6 +13,10 @@ jobs:
       uses: actions/checkout@master
     - name: Create build directory
       run: mkdir module1/homework/calculate/build
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ${{ matrix.cc }}
     - name: Compile
       working-directory: module1/homework/calculate/build
       env:
@@ -33,6 +37,10 @@ jobs:
       uses: actions/checkout@master
     - name: Create build directory
       run: mkdir module1/homework/fibonacci/build
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ${{ matrix.cc }}
     - name: Compile
       working-directory: module1/homework/fibonacci/build
       env:
