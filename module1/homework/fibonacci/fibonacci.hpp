@@ -8,7 +8,6 @@ int fibonacci_iterative(int sequence) {
   if (sequence == 1) return current;
   for (int it = 2; it <= sequence; ++it) {
     result = last + current;
-    std::cout << last << " " << current << std::endl;
     last = current;
     current = result;
   }
