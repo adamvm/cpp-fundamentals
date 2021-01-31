@@ -1,13 +1,12 @@
 name: Module 1 homework
 
 on: [push, pull_request]
-
 jobs:
   fibonacci:
+    runs-on: ubuntu-latest
     strategy:    
       matrix:
         cc: [gcc, clang]
-    runs-on: ubuntu-latest
     steps:
     - name: Check out code
       uses: actions/checkout@master
