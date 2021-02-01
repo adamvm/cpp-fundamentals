@@ -19,12 +19,10 @@ jobs:
         sudo apt-get install -y ${{ matrix.cc }}
     - name: Compile
       working-directory: module1/homework/fibonacci/build
-      env:
-        CC: ${{ matrix.cc }}
       run: |
         echo "C++ Compiler:"
         ${CC} --version
-        cmake ..
+        cmake -DCXX_COMPILER={{ matrix.cc }} ..
         make
     - name: Run tests
       working-directory: module1/homework/fibonacci/build
