@@ -18,6 +18,8 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y ${{ matrix.cc }}
     - name: Compile
+      env:
+        CC: ${{ matrix.cc }}
       working-directory: module1/homework/fibonacci/build
       run: |
         echo "C++ Compiler:"
