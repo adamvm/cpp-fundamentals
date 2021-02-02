@@ -26,7 +26,7 @@ jobs:
         ${CXX} --version
         cmake -DCMAKE_CXX_FLAGS=-O${{matrix.optimize}} ..
         make
-        ls -al module1/homework/fibonacci/build
+        ls -al /home/runner/work/cpp-fundamentals/cpp-fundamentals/module1/homework/fibonacci/build
     - name: Run tests
-      working-directory: /home/runner/work/cpp-fundamentals/cpp-fundamentals/module1/homework/fibonacci/build
+      working-directory: module1/homework/fibonacci/build
       run: ctest -V
