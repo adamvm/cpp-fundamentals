@@ -28,5 +28,5 @@ jobs:
         make
         ls -al module1/homework/fibonacci/build
     - name: Run tests
-      working-directory: module1/homework/fibonacci/build
+      working-directory: /home/runner/work/cpp-fundamentals/cpp-fundamentals/module1/homework/fibonacci/build
       run: ctest -V
