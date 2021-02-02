@@ -24,7 +24,8 @@ jobs:
       run: |
         echo "C++ Compiler:"
         ${Compiler} --version
-        cmake -DCMAKE_CXX_COMPILER={{ matrix.cc }} ..
+        echo "Compilers path: $(which $Compiler)"
+        cmake -DCMAKE_CXX_COMPILER=$(which {{ matrix.cc }}) ..
         make
     - name: Run tests
       working-directory: module1/homework/fibonacci/build
