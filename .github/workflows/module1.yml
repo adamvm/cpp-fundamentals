@@ -1,47 +1,32 @@
 name: Module 1 homework
 
 on: [push, pull_request]
-
 jobs:
-  calculate:
-    strategy:    
-      matrix:
-        cc: [gcc, clang]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out code
-      uses: actions/checkout@master
-    - name: Create build directory
-      run: mkdir module1/homework/calculate/build
-    - name: Compile
-      working-directory: module1/homework/calculate/build
-      env:
-        CC: ${{ matrix.cc }}
-      run: |
-        echo "C++ Compiler:"
-        ${CC} --version
-        cmake ..
-        make
-    - name: Run tests
-      working-directory: module1/homework/calculate/build
-      run: ctest -V
-
   fibonacci:
     runs-on: ubuntu-latest
+    strategy:    
+      matrix:
+        cc: [g++, clang++]
+        optimize: [0, 1, 2, 3, fast, s]
     steps:
     - name: Check out code
       uses: actions/checkout@master
     - name: Create build directory
       run: mkdir module1/homework/fibonacci/build
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc clang-10
     - name: Compile
-      working-directory: module1/homework/fibonacci/build
       env:
-        CC: ${{ matrix.cc }}
+        CXX: ${{ matrix.cc }}
+      working-directory: module1/homework/fibonacci/build
       run: |
         echo "C++ Compiler:"
-        ${CC} --version
-        cmake ..
+        ${CXX} --version
+        cmake -DCMAKE_CXX_FLAGS=-O${{matrix.optimize}} ..
         make
+        ls -al /home/runner/work/cpp-fundamentals/cpp-fundamentals/module1/homework/fibonacci/build
     - name: Run tests
       working-directory: module1/homework/fibonacci/build
       run: ctest -V
